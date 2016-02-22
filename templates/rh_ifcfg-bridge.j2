@@ -1,16 +1,21 @@
-NAME=br{{ bridge }}
-DEVICE=br{{ bridge }}
-{% set iface = 'ansible_' + iface_name %}
+NAME={{ bridge }}
+DEVICE={{ bridge }}
+{% set iface = 'ansible_' + slave %}
+{% if enable_ipv4 %}
 IPADDR={{ hostvars[inventory_hostname][iface]['ipv4']['address'] }}
 NETMASK={{ hostvars[inventory_hostname][iface]['ipv4']['netmask'] }}
 {% if hostvars[inventory_hostname]['ansible_default_ipv4']['interface'] == iface_name %}
 GATEWAY={{ hostvars[inventory_hostname]['ansible_default_ipv4']['gateway'] }}
 {% endif %}
-IPV6INIT=no
-IPV6AUTOCONF=no
+{% endif %}
+{% if enable_ipv6 %}
+IPV6INIT="{{ init_ipv6 }}"
+IPV6_AUTOCONF="{{ ipv6_autoconf }}"
+{% endif %}
 DELAY=0
 STP=yes
 ONBOOT=yes
-BOOTPROTO="static"
+BOOTPROTO=none
 TYPE="Bridge"
 NOZEROCONF="yes"
+MTU="{{ mtu }}"

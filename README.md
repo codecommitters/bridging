@@ -22,6 +22,12 @@ None
 Example Playbook
 ----------------
 
+- hosts: nc-9
+  roles:
+  - bridging
+  vars:
+  - slave: bond0.130
+  - bridge: br0
 
 License
 -------

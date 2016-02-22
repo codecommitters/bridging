@@ -3,9 +3,9 @@
 #
 
 - name: Create the bridge interface configuration file
-  template: rh_ifcfg-bridge.j2 dest="{{ rh_network_sysconfig }}/ifcfg-{{ bridge }}"
+  template: src=rh_ifcfg-bridge.j2 dest="{{ rh_network_sysconfig }}/ifcfg-{{ bridge }}"
 
 - name: Create the slave bridge configuration file
-  template: rh_ifcfg-slave.j2 dest="{{ rh_network_sysconfig }}/ifcfg-{{ item }}"
+  template: src=rh_ifcfg-slave.j2 dest="{{ rh_network_sysconfig }}/ifcfg-{{ item }}"
   with_items:
-  - "{{ slaves }}"
+  - "{{ slave }}"
