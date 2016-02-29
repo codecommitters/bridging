@@ -1,7 +1,13 @@
 ---
-# defaults file for .
+# defaults file for briding
+
+# apply: true will write to the sysconfig directory
+apply: false
+
+# Directories
 
 rh_network_sysconfig: /etc/sysconfig/network-scripts
+tmp_dir: /tmp
 
 # Normal values
 mtu: 1500
