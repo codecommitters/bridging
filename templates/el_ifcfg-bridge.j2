@@ -4,7 +4,7 @@ DEVICE={{ bridge }}
 {% if enable_ipv4 %}
 IPADDR={{ hostvars[inventory_hostname][iface]['ipv4']['address'] }}
 NETMASK={{ hostvars[inventory_hostname][iface]['ipv4']['netmask'] }}
-{% if hostvars[inventory_hostname]['ansible_default_ipv4']['interface'] == iface_name %}
+{% if hostvars[inventory_hostname]['ansible_default_ipv4']['interface'] == iface %}
 GATEWAY={{ hostvars[inventory_hostname]['ansible_default_ipv4']['gateway'] }}
 {% endif %}
 {% endif %}

@@ -1,0 +1,45 @@
+#
+# RedHat configuration files
+#
+
+- name: Install dependencies
+  yum: name="bridge-utils" state=present
+  tags:
+  - bridge
+  - el
+
+- name: Create the bridge interface configuration file | Apply TRUE
+  template: src=el_ifcfg-bridge.j2 dest="{{ el_network_sysconfig }}/ifcfg-{{ bridge }}"
+  tags:
+  - bridge
+  - el
+  when:
+  - apply
+
+- name: Create the slave bridge configuration file | Apply TRUE
+  template: src=el_ifcfg-slave.j2 dest="{{ el_network_sysconfig }}/ifcfg-{{ item }}" backup=yes
+  with_items:
+  - "{{ slave }}"
+  when:
+  - apply
+  tags:
+  - bridge
+  - el
+
+- name: Create the bridge interface configuration file | Apply FALSE
+  template: src=el_ifcfg-bridge.j2 dest="{{ tmp_dir }}/ifcfg-{{ bridge }}"
+  tags:
+  - bridge
+  - el
+  when:
+  - not apply
+
+- name: Create the slave bridge configuration file | Apply FALSE
+  template: src=el_ifcfg-slave.j2 dest="{{ tmp_dir }}/ifcfg-{{ item }}" backup=yes
+  with_items:
+  - "{{ slave }}"
+  when:
+  - not apply
+  tags:
+  - bridge
+  - el

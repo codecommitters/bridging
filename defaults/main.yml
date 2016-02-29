@@ -6,7 +6,7 @@ apply: false
 
 # Directories
 
-rh_network_sysconfig: /etc/sysconfig/network-scripts
+el_network_sysconfig: /etc/sysconfig/network-scripts
 tmp_dir: /tmp
 
 # Normal values
@@ -14,7 +14,7 @@ mtu: 1500
 
 # Bonding IP settings
 
-enable_ipv4: false
+enable_ipv4: true
 
 # IPv6 options
 
